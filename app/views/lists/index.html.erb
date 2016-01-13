@@ -1,0 +1,71 @@
+<h2>Your Lists</h2>
+<script>
+$(document).ready(function(){
+     
+    $("#add_list").click(function(){   	
+    $(".modal-body").load("http://localhost:3000/lists/new",function(r){});
+    $(".modal-title").text("New list");
+    $("#add_list").attr("data-target","#myModal");
+    $("#add_list").attr("data-toggle","modal");
+    });
+
+
+    $(".edit_list").click(function(){	
+    //alert($(this).attr("key"));	
+    $(".modal-body").load("http://localhost:3000/lists/"+$(this).attr("key")+"/edit",function(r){//alert(r);
+    });
+    $(".modal-title").text("Edit list");
+    $(".edit_list").attr("data-target","#myModal");
+    $(".edit_list").attr("data-toggle","modal");
+    });
+});
+
+
+
+</script>
+
+<!-- Button to add new list -->
+<button id="add_list" type="button" class="btn btn-primary">
+  Add new lists
+</button>
+
+<!-- Add new list -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">....</h4>
+      </div>
+      <div class="modal-body">
+        <a href="localhost:8000/lists/new" data-no-turbolink>No turbolinks here</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<% if @lists %>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>description</th>
+  </tr>
+ 
+  <% @lists.each do |article| %>
+    <tr>
+      <td><%= article.title %></td>
+      <td><%= article.description %></td>
+      <td><button type="button" key= <%=article.id%> class="edit_list">Edit</button></td>
+    </tr>
+  <% end %>
+</table>
+
+<% else %>
+You have no lists!!
+
+<% end %>
