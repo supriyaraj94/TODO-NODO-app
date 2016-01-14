@@ -1,0 +1,67 @@
+<script>
+$(document).ready(function(){
+    $('.sortable').sortable();
+    $("#add_item").click(function(){   
+    $(".modal-body").load("<%= new_list_item_url(@list) %>",function(r){});
+    $(".modal-title").text("New Item");
+    $("#add_item").attr("data-target","#myModal");
+    $("#add_item").attr("data-toggle","modal");
+    });
+
+});
+</script>
+
+
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">....</h4>
+      </div>
+      <div class="modal-body">
+        <a href="localhost:8000/lists/new" data-no-turbolink>No turbolinks here</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+
+  <div class="well">
+    <h1><%= @list.title %></h1>
+</div>
+
+
+
+<div class="row">
+  <div class="col-md-5 col-md-offset-4 sortable">
+<% @list.items.each do |article| %> 
+      <div class="panel panel-default ">  
+      <div class="panel-heading label">
+      <%= article.title %>
+      </div>
+      <div class="panel-body">
+      <%= article.description %>
+      <br>
+      <button type="button" key= <%=article.id%> class="edit_item">Edit Item</button>
+      <%= link_to 'Delete Item', list_item_path(@list,article), method: :delete %>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>
+
+
+<button id="add_item" key=<%= @list.id %>type="button" class="btn btn-primary">
+  Add new Items
+</button>
+<%= link_to 'Back To All Lists', lists_path, method: :get %>
+

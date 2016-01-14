@@ -19,9 +19,6 @@ $(document).ready(function(){
     $(".edit_list").attr("data-toggle","modal");
     });
 });
-
-
-
 </script>
 
 <!-- Button to add new list -->
@@ -60,7 +57,28 @@ $(document).ready(function(){
     <tr>
       <td><%= article.title %></td>
       <td><%= article.description %></td>
-      <td><button type="button" key= <%=article.id%> class="edit_list">Edit</button></td>
+      <td><button type="button" key= <%=article.id%> class="edit_list">Edit Table</button></td>
+      <td><%= link_to 'Delete List', list_path(article), method: :delete %></td>
+      <td><%= link_to 'Edit Items', list_items_path(article), method: :get %></td>
+
+
+   
+    <td>
+    <table> 
+  <% article.items.each do |f| %>
+    <tr>
+      <td><%= f.title %></td>
+      <td><%= f.description %></td>
+    </tr>
+    
+  <% end %>
+</table>
+
+
+
+
+
+      </td>
     </tr>
   <% end %>
 </table>

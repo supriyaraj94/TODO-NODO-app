@@ -23,6 +23,12 @@ class ListsController < ApplicationController
      redirect_to lists_path	
     end
 
+    def destroy
+     @user = User.find_by(email: current_user.email)	
+     @user.lists.destroy(@user.lists.find_by(id: params[:id]))
+     redirect_to lists_path
+     end	
+
     private
   def list_params
     params.require(:list).permit(:title, :description)
