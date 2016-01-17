@@ -1,8 +1,7 @@
-<h2>Your Lists</h2>
+<h3>Your Lists</h3>
 <script>
-$(document).ready(function(){
-     
-    $("#add_list").click(function(){   	
+  $(document).ready(function(){
+    $("#add_list").click(function(){
     $(".modal-body").load("http://localhost:3000/lists/new",function(r){});
     $(".modal-title").text("New list");
     $("#add_list").attr("data-target","#myModal");
@@ -10,20 +9,20 @@ $(document).ready(function(){
     });
 
 
-    $(".edit_list").click(function(){	
-    //alert($(this).attr("key"));	
+    $(".edit_list").click(function(){
+    //alert($(this).attr("key"));
     $(".modal-body").load("http://localhost:3000/lists/"+$(this).attr("key")+"/edit",function(r){//alert(r);
     });
     $(".modal-title").text("Edit list");
     $(".edit_list").attr("data-target","#myModal");
     $(".edit_list").attr("data-toggle","modal");
     });
-});
+  });
 </script>
 
 <!-- Button to add new list -->
-<button id="add_list" type="button" class="btn btn-primary">
-  Add new lists
+<button id="add_list" type="button" class="btn btn-sm btn-primary">
+  Add new list
 </button>
 
 <!-- Add new list -->
@@ -47,43 +46,44 @@ $(document).ready(function(){
 
 
 <% if @lists %>
-<table>
-  <tr>
-    <th>Title</th>
-    <th>description</th>
-  </tr>
- 
-  <% @lists.each do |article| %>
-    <tr>
-      <td><%= article.title %></td>
-      <td><%= article.description %></td>
-      <td><button type="button" key= <%=article.id%> class="edit_list">Edit Table</button></td>
-      <td><%= link_to 'Delete List', list_path(article), method: :delete %></td>
-      <td><%= link_to 'Edit Items', list_items_path(article), method: :get %></td>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Actions</th>
+          <th>Items</th>
+        </tr>
+      </thead>
 
+      <tbody>
+        <% @lists.each do |list| %>
+          <tr>
+            <td><%= list.title %></td>
+            <td><%= list.description %></td>
+            <td>
+              <button type="button" key="<%= list.id %>" class="edit_list btn btn-xs btn-warning">Edit List</button>
+              <%= link_to 'Delete List', list_path(list), method: :delete, class: "btn btn-xs btn-danger" %>
+              <%= link_to 'Edit Items', list_items_path(list), method: :get, class: "btn btn-xs btn-warning" %>
+            </td>
+            <td>
+              <table>
+                <% list.items.each do |f| %>
+                  <tr>
+                    <td><%= f.title %></td>
+                    <td><%= f.description %></td>
+                  </tr>
 
-   
-    <td>
-    <table> 
-  <% article.items.each do |f| %>
-    <tr>
-      <td><%= f.title %></td>
-      <td><%= f.description %></td>
-    </tr>
-    
-  <% end %>
-</table>
-
-
-
-
-
-      </td>
-    </tr>
-  <% end %>
-</table>
+                <% end %>
+              </table>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
 <% else %>
-You have no lists!!
-
+  You have no lists!!
 <% end %>

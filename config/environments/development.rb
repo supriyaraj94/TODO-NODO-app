@@ -38,4 +38,16 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  BetterErrors::Middleware.allow_ip!(Rails.application.secrets.trusted_ip) if Rails.application.secrets.trusted_ip.present?
+  config.web_console.whitelisted_ips = Rails.application.secrets.trusted_ip
+
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+    Bullet.add_footer = true
+  end
 end
