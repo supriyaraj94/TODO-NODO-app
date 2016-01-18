@@ -12,9 +12,11 @@
 #
 
 class List < ActiveRecord::Base
+
  has_many :items, inverse_of: :list ,autosave: :true, dependent: :destroy
  belongs_to :user
 
  validates_presence_of :title
  validates :title, uniqueness: { scope: :user}
+
 end

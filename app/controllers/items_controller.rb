@@ -19,6 +19,7 @@ def create
   end
 
 def index
+
      @list=List.find(params[:list_id])
   end
 

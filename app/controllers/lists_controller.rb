@@ -10,6 +10,7 @@ class ListsController < ApplicationController
 
   def new
     @new_list = List.new
+
   end
 
   def create
@@ -30,6 +31,7 @@ class ListsController < ApplicationController
     else
       render :edit
     end
+
   end
 
   def destroy
