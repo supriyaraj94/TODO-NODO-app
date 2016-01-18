@@ -7,6 +7,12 @@ $(document).ready(function(){
     $("#add_item").attr("data-target","#myModal");
     $("#add_item").attr("data-toggle","modal");
     });
+    $(".move_item").click(function(){   
+    $(".modal-body").load("items/showLists/"+$(this).attr("key"),function(r){});
+    $(".modal-title").text("Move Item");
+    $(".move_item").attr("data-target","#myModal");
+    $(".move_item").attr("data-toggle","modal");
+    });
 
 });
 </script>
@@ -51,8 +57,9 @@ $(document).ready(function(){
       <div class="panel-body">
       <%= article.description %>
       <br>
-      <button type="button" key= <%=article.id%> class="edit_item">Edit Item</button>
+      <button type="button" key= <%=article.id%> class="move_item">Move Item</button>
       <%= link_to 'Delete Item', list_item_path(@list,article), method: :delete %>
+
       </div>
     </div>
   <% end %>

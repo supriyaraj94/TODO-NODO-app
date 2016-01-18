@@ -1,19 +1,33 @@
-<h1>Editing article</h1>
+<div class="well">
+  <h3>Edit list</h3>
+
+  <%= form_for @list, method: :patch do |f| %>
+
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title, class: "form-control" %>
+    </p>
+
+    <p>
+      <%= f.label :description %><br>
+      <%= f.text_area :description, class: "form-control" %>
+    </p>
+
+    <p>
+      <%= f.submit %>
+    </p>
+
+  <% end %>
+</div>
+
+<% if @list.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@list.errors.count, "error") %> prohibited this article from being saved:</h2>
  
-<%= form_for :list, url: list_path(@list), method: :patch do |f| %>
- 
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
- 
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-  </p>
- 
+    <ul>
+    <% @list.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>

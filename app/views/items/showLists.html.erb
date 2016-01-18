@@ -1,0 +1,10 @@
+move item to:
+<br>
+<%= form_tag(move_item_path+"/"+@item, method: "get") do %>
+  <% @lists.each do |article| %> 
+    <%= radio_button_tag(:newlist, article.id) %>
+    <%= label_tag("",article.title) %><br>
+  <% end %>
+  <br>
+  <%= submit_tag "Move Item" %>
+<% end %>

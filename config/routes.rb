@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins
   devise_for :users
   resources :lists do
     resources :items
@@ -57,4 +58,8 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  get 'admin', to: 'admins#index', as: :admin
+  get 'admin/view/(:email)' ,to: 'admins#view', as: :view_as_admin
+  get 'lists/(:list_id)/items/showLists/(:item_id)', to: 'items#showLists', as: :show_lists
+  get 'lists/moveItem/(:item_id)', to: 'items#moveItem', via: [:get] ,as: :move_item
 end
