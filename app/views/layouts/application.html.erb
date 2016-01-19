@@ -9,6 +9,25 @@
 </head>
 <body>
 <!-- TODO: Add a navbar -->
+<%= navbar fixed: :top do %>
+  <%= navbar_header brand: 'My great app', brand_link: '/home' %>
+  <%= navbar_collapse do %>
+    <%= navbar_group class: 'foo', id: 'menu' do %>
+      <%= navbar_item "View Lists", '/lists' %>
+    <% end %>
+    <%= navbar_group align: 'right' do %>
+      <% if true # check if user is logged in, maybe like "if current_user.present?" %>
+        <%= navbar_item "Log Out", '/logout' %>
+      <% else %>
+        <%= navbar_item "Log In", '/users/sign_in' %>
+        <%= navbar_item "Sign Up", '/users/sign_up' %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+<!-- -->
 <div class="container-fluid">
   <%= yield %>
 </div>

@@ -57,5 +57,6 @@ end
 
 gem 'devise'
 gem 'bootswatch-rails'
+gem 'rails_bootstrap_navbar'
 
 

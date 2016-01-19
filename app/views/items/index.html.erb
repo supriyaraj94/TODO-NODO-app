@@ -1,6 +1,15 @@
 <script>
+
+    function setPositions(){
+    var i=0;
+    //alert("here");
+    $('.panel.panel-default').each(function(i){
+        $(this).attr("data-pos",i+1);
+    });
+    }
+
 $(document).ready(function(){
-    $('.sortable').sortable();
+    //$('.sortable').sortable();
     $("#add_item").click(function(){   
     $(".modal-body").load("<%= new_list_item_url(@list) %>",function(r){});
     $(".modal-title").text("New Item");
@@ -12,6 +21,25 @@ $(document).ready(function(){
     $(".modal-title").text("Move Item");
     $(".move_item").attr("data-target","#myModal");
     $(".move_item").attr("data-toggle","modal");
+    });
+
+    setPositions();
+
+    $('.sortable').sortable().bind('sortupdate', function(e, ui) {
+        // array to store new order
+        updated_order = []
+        // set the updated positions
+        setPositions();
+        var i=0;
+        // populate the updated_order array with the new task positions
+        $('.panel-default').each(function(i){
+            updated_order.push({ id: $(this).data("id"), position: i+1 });
+    });
+          $.ajax({
+            type: "PUT",
+            url: "<%=sort_list_items_path(@list)%>",
+            data: { order: updated_order }
+        });
     });
 
 });
@@ -48,9 +76,9 @@ $(document).ready(function(){
 
 
 <div class="row">
-  <div class="col-md-5 col-md-offset-4 sortable">
+  <div class="col-md-5 col-md-offset-4 sortable ">
 <% @list.items.each do |article| %> 
-      <div class="panel panel-default ">  
+      <div class="panel panel-default sortable-placeholder" data-id=<%= article.id%> >  
       <div class="panel-heading label">
       <%= article.title %>
       </div>
@@ -59,6 +87,7 @@ $(document).ready(function(){
       <br>
       <button type="button" key= <%=article.id%> class="move_item">Move Item</button>
       <%= link_to 'Delete Item', list_item_path(@list,article), method: :delete %>
+      <%= link_to 'Manage Comments', list_item_comments_path(@list,article), method: :get%>
 
       </div>
     </div>
