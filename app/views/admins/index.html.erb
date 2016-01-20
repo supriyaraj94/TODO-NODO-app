@@ -1,4 +1,0 @@
-<% @users = User.all %>
-<% @users.each do |user| %>
-  <%= user.email %>   <%= link_to '  Goto/Edit Lists', view_as_admin_path(user.email), method: :get %><br/>
-<% end %>

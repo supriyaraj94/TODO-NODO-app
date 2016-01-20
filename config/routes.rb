@@ -61,8 +61,12 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  get 'admin', to: 'admins#index', as: :admin
-  get 'admin/view/(:email)' ,to: 'admins#view', as: :view_as_admin
+  get 'home', to:'home#index'
+  get 'home/search/(:q)', to: 'home#search'
+  get 'master/exportData', to:'master#exportData'
+  get 'master/formatData', to:'master#formatData'
+  get 'master', to: 'master#index', as: :master
+  get 'master/view/(:email)' ,to: 'master#view', as: :view_as_master
   get 'lists/(:list_id)/items/showLists/(:item_id)', to: 'items#showLists', as: :show_lists
   get 'lists/moveItem/(:item_id)', to: 'items#moveItem', via: [:get] ,as: :move_item
 end

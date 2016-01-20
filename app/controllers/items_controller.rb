@@ -40,7 +40,8 @@ def moveItem
   @item=Item.find(params[:item_id])
   @item.list=List.find(params[:newlist])
   @item.save
-  render :nothing => true
+  redirect_to lists_path
+  
 end  
 
 def sort

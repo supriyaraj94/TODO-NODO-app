@@ -9,23 +9,34 @@
 </head>
 <body>
 <!-- TODO: Add a navbar -->
-<%= navbar fixed: :top do %>
-  <%= navbar_header brand: 'My great app', brand_link: '/home' %>
+<%= navbar  do %>
+  <%= navbar_header brand: 'TODO app', brand_link: '/home' %>
   <%= navbar_collapse do %>
     <%= navbar_group class: 'foo', id: 'menu' do %>
-      <%= navbar_item "View Lists", '/lists' %>
+      <%= navbar_item "View lists as user", '/lists' %>
+      <%= navbar_item "View lists as admin", '/master' %>
+      <%= navbar_item "Export Data", '/master/exportData.xls' %>
     <% end %>
     <%= navbar_group align: 'right' do %>
-      <% if true # check if user is logged in, maybe like "if current_user.present?" %>
-        <%= navbar_item "Log Out", '/logout' %>
+      <% if user_signed_in? # check if user is logged in, maybe like "if current_user.present?" %>
+      <li class="active">
+       <a  rel="nofollow" data-method="delete" href="users/sign_out">User Sign Out</a></li>
       <% else %>
-        <%= navbar_item "Log In", '/users/sign_in' %>
-        <%= navbar_item "Sign Up", '/users/sign_up' %>
+        <%= navbar_item "User Log In", 'users/sign_in' %>
+        <%= navbar_item "User Sign Up", 'users/sign_up' %>
+      <% end %>
+    <% end %>
+    <%= navbar_group align: 'right' do %>
+      <% if admin_signed_in? # check if user is logged in, maybe like "if current_user.present?" %>
+           <li class="active">
+       <a  rel="nofollow" data-method="delete" href="admins/sign_out">Admin Sign Out</a></li>
+      <% else %>
+        <%= navbar_item "Admin Log In", 'admins/sign_in' %>
+          <%= navbar_item "Admin Sign Up", 'admins/sign_up' %>
       <% end %>
     <% end %>
   <% end %>
 <% end %>
-
 
 <!-- -->
 <div class="container-fluid">

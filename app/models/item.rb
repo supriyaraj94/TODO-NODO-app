@@ -20,4 +20,12 @@ class Item < ActiveRecord::Base
 	validates :priority, uniqueness: { scope: :list}
 	default_scope { order("priority ASC") }
 
+ def as_xls(options = {})
+    {
+      "title" => title,
+    }
+ end
+
+
+
 end

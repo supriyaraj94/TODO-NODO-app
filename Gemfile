@@ -58,5 +58,9 @@ end
 gem 'devise'
 gem 'bootswatch-rails'
 gem 'rails_bootstrap_navbar'
+gem "spreadsheet", "0.6.8"
+gem "to_xls"
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 
