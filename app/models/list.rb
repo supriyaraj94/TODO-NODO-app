@@ -10,10 +10,10 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-require 'elasticsearch/model'
+
 class List < ActiveRecord::Base
-   include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  # include Elasticsearch::Model
+  # include Elasticsearch::Model::Callbacks
  has_many :items, inverse_of: :list ,autosave: :true, dependent: :destroy
  belongs_to :user
 
@@ -35,4 +35,3 @@ end
 end
 
 
-#List.import

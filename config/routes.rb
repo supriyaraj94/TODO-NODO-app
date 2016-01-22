@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   get 'home', to:'home#index'
-  get 'home/search/(:q)', to: 'home#search'
+  get 'home/search/(:q)', to: 'home#search', as: :search_lists
   get 'master/exportData', to:'master#exportData'
   get 'master/formatData', to:'master#formatData'
   get 'master', to: 'master#index', as: :master

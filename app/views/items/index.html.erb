@@ -22,6 +22,12 @@ $(document).ready(function(){
     $(".move_item").attr("data-target","#myModal");
     $(".move_item").attr("data-toggle","modal");
     });
+    $(".edit_item").click(function(){   
+    $(".modal-body").load("/lists/"+"<%= @list.id %>"+"/items/"+$(this).attr("key")+"/edit",function(r){});
+    $(".modal-title").text("edit Item");
+    $(".edit_item").attr("data-target","#myModal");
+    $(".edit_item").attr("data-toggle","modal");
+    });
 
     setPositions();
 
@@ -86,6 +92,7 @@ $(document).ready(function(){
       <%= article.description %>
       <br>
       <button type="button" key= <%=article.id%> class="move_item">Move Item</button>
+      <button type="button" key= <%=article.id%> class="edit_item">Edit Item</button>
       <%= link_to 'Delete Item', list_item_path(@list,article), method: :delete %>
       <%= link_to 'Manage Comments', list_item_comments_path(@list,article), method: :get%>
 

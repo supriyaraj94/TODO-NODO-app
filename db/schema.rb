@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160119122006) do
+ActiveRecord::Schema.define(version: 20160122132203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,11 +45,15 @@ ActiveRecord::Schema.define(version: 20160119122006) do
 
   create_table "items", force: :cascade do |t|
     t.integer  "list_id"
-    t.string   "title",                                            null: false
-    t.text     "description", default: "No description available"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
-    t.integer  "priority",                                         null: false
+    t.string   "title",                                                    null: false
+    t.text     "description",         default: "No description available"
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+    t.integer  "priority",                                                 null: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "items", ["list_id"], name: "index_items_on_list_id", using: :btree

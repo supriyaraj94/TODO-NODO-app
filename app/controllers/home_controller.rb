@@ -4,14 +4,13 @@ class HomeController < ApplicationController
   end
   
   def search
-  if params[:q].nil?
-    @articles = []
-  else
-    @articles = List.search params[:q]
-    render tex: @articles
+    @search = Item.search params[:q]
+    @items=@search.result.includes(:list, :comments)
+    @search.build_condition if @search.conditions.empty?
+    dfv
   end
 end
 
   
-end
+
 

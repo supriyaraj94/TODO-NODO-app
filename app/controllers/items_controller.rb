@@ -27,7 +27,7 @@ end
 def destroy
   @olditem=Item.find(params[:id])
   Item.destroy(params[:id])
-  #UserMailer.welcome_email(@olditem).deliver_now
+  UserMailer.welcome_email(@olditem).deliver_now
   redirect_to list_items_path(params[:list_id])
 end
 
@@ -42,7 +42,22 @@ def moveItem
   @item.save
   redirect_to lists_path
   
-end  
+end 
+
+def edit
+  @item=Item.find(params[:id])
+  end
+
+def update
+  @item=Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to list_items_path(@item.list)
+    else
+      render :edit
+    end
+
+end 
+
 
 def sort
   params[:order].each do |key,value|
