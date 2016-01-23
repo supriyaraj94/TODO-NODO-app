@@ -20,12 +20,5 @@ class Item < ActiveRecord::Base
 	validates :priority, uniqueness: { scope: :list}
 	default_scope { order("priority ASC") }
 	has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }
- def as_xls(options = {})
-    {
-      "title" => title,
-    }
- end
-
-
 
 end

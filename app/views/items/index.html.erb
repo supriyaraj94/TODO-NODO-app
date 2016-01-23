@@ -1,32 +1,32 @@
 <script>
 
-    function setPositions(){
+  function setPositions(){
     var i=0;
     //alert("here");
     $('.panel.panel-default').each(function(i){
         $(this).attr("data-pos",i+1);
     });
-    }
+  }
 
-$(document).ready(function(){
+  $(document).ready(function(){
     //$('.sortable').sortable();
     $("#add_item").click(function(){   
-    $(".modal-body").load("<%= new_list_item_url(@list) %>",function(r){});
-    $(".modal-title").text("New Item");
-    $("#add_item").attr("data-target","#myModal");
-    $("#add_item").attr("data-toggle","modal");
+      $(".modal-body").load("<%= new_list_item_url(@list) %>",function(r){});
+      $(".modal-title").text("New Item");
+      $("#add_item").attr("data-target","#myModal");
+      $("#add_item").attr("data-toggle","modal");
     });
     $(".move_item").click(function(){   
-    $(".modal-body").load("items/showLists/"+$(this).attr("key"),function(r){});
-    $(".modal-title").text("Move Item");
-    $(".move_item").attr("data-target","#myModal");
-    $(".move_item").attr("data-toggle","modal");
+      $(".modal-body").load("items/showLists/"+$(this).attr("key"),function(r){});
+      $(".modal-title").text("Move Item");
+      $(".move_item").attr("data-target","#myModal");
+      $(".move_item").attr("data-toggle","modal");
     });
     $(".edit_item").click(function(){   
-    $(".modal-body").load("/lists/"+"<%= @list.id %>"+"/items/"+$(this).attr("key")+"/edit",function(r){});
-    $(".modal-title").text("edit Item");
-    $(".edit_item").attr("data-target","#myModal");
-    $(".edit_item").attr("data-toggle","modal");
+      $(".modal-body").load("/lists/"+"<%= @list.id %>"+"/items/"+$(this).attr("key")+"/edit",function(r){});
+      $(".modal-title").text("edit Item");
+      $(".edit_item").attr("data-target","#myModal");
+      $(".edit_item").attr("data-toggle","modal");
     });
 
     setPositions();
@@ -40,33 +40,36 @@ $(document).ready(function(){
         // populate the updated_order array with the new task positions
         $('.panel-default').each(function(i){
             updated_order.push({ id: $(this).data("id"), position: i+1 });
-    });
-          $.ajax({
-            type: "PUT",
-            url: "<%=sort_list_items_path(@list)%>",
-            data: { order: updated_order }
+        });
+        $.ajax({
+          type: "PUT",
+          url: "<%=sort_list_items_path(@list)%>",
+          data: { order: updated_order }
         });
     });
 
-});
+  });
 </script>
 
 
 
 
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="    myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          <span aria-hidden="true">&times;</span>
+        </button>
         <h4 class="modal-title" id="myModalLabel">....</h4>
       </div>
       <div class="modal-body">
         <a href="localhost:8000/lists/new" data-no-turbolink>No turbolinks here</a>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Close
+        </button>
       </div>
     </div>
   </div>
@@ -75,7 +78,7 @@ $(document).ready(function(){
 
 
 
-  <div class="well">
+<div class="well">
     <h1><%= @list.title %></h1>
 </div>
 
@@ -83,8 +86,9 @@ $(document).ready(function(){
 
 <div class="row">
   <div class="col-md-5 col-md-offset-4 sortable ">
-<% @list.items.each do |article| %> 
+    <% @list.items.each do |article| %> 
       <div class="panel panel-default sortable-placeholder" data-id=<%= article.id%> >  
+      </div>
       <div class="panel-heading label">
       <%= article.title %>
       </div>
@@ -98,8 +102,7 @@ $(document).ready(function(){
 
       </div>
     </div>
-  <% end %>
-</div>
+    <% end %>
 </div>
 
 
