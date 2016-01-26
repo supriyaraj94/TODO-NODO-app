@@ -1,7 +1,0 @@
-<%= search_form_for @search,url:search_lists_path , method: :get do |f| %>    
-  <%= f.condition_fields do |c| %>
-    <%= render "condition_fields", f: c %>
-  <% end %>
-  <%= f.submit %>
-<% end %>
-

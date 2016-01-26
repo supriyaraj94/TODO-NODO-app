@@ -60,7 +60,7 @@ gem 'bootswatch-rails'
 gem 'rails_bootstrap_navbar'
 gem "spreadsheet", "0.6.8"
 gem "to_xls"
-gem 'ransack'
+gem 'ransack', github: 'activerecord-hackery/ransack'
 gem "paperclip", "~> 4.3"
 
 

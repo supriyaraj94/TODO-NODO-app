@@ -84,26 +84,27 @@
 
 
 
-<div class="row">
+
   <div class="col-md-5 col-md-offset-4 sortable ">
     <% @list.items.each do |article| %> 
-      <div class="panel panel-default sortable-placeholder" data-id=<%= article.id%> >  
-      </div>
-      <div class="panel-heading label">
-      <%= article.title %>
-      </div>
-      <div class="panel-body">
-      <%= article.description %>
-      <br>
-      <button type="button" key= <%=article.id%> class="move_item">Move Item</button>
-      <button type="button" key= <%=article.id%> class="edit_item">Edit Item</button>
-      <%= link_to 'Delete Item', list_item_path(@list,article), method: :delete %>
-      <%= link_to 'Manage Comments', list_item_comments_path(@list,article), method: :get%>
-
+    <div class="sortable-placeholder">
+      <div class="panel panel-default " data-id=<%= article.id%> style="height:80px ; overflow-y: scroll;   margin-bottom: 10px;">  
+        <div class="panel-heading label">
+          <%= article.title %>
+        </div>
+        <div class="panel-body">
+          <%= article.description %> 
+          <button type="button" key= <%=article.id%> class="move_item">Move Item</button>
+          <button type="button" key= <%=article.id%> class="edit_item">Edit Item</button>
+          <%= link_to 'Delete Item', list_item_path(@list,article), method: :delete %>
+          <%= link_to 'Manage Comments', list_item_comments_path(@list,article), method: :get%>
+          <%= image_tag article.avatar.url(:thumb) %>
+        </div>
       </div>
     </div>
     <% end %>
-</div>
+  </div>
+
 
 
 <button id="add_item" key=<%= @list.id %>type="button" class="btn btn-primary">

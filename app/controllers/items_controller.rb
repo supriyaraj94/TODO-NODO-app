@@ -1,9 +1,5 @@
-# FIXME: User proper indentation, 2 spaces and tabs converted to spaces
-# FIXME: Use space around assignment operator
 # FIXME: Fix N+1 queries
-# FIXME: Enable user authentication
-# OPTIMIZE: current_user is already the required user object; no need to find a user through it
-# COMMENT: User underscore to name multi-worded variables
+
 class ItemsController < ApplicationController
   before_filter :authenticate_user!
 
@@ -27,7 +23,7 @@ class ItemsController < ApplicationController
   def destroy
     @olditem = Item.find(params[:id])
     Item.destroy(params[:id])
-    UserMailer.welcome_email(@olditem).deliver_now
+    #UserMailer.welcome_email(@olditem).deliver_now
     redirect_to list_items_path(params[:list_id])
   end
 
@@ -66,7 +62,7 @@ class ItemsController < ApplicationController
 
   private
     def item_params
-      params.require(:item).permit(:title, :description)
+      params.require(:item).permit(:title, :description , :avatar)
     end
 
 end

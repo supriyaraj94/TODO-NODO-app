@@ -27,6 +27,14 @@ class MasterController < ApplicationController
 
   def formatData
   end
+
+  def search
+    @search = Item.search params[:q]
+    @search.sorts = ['title asc']
+    @items=@search.result.includes(:list, :comments)
+    @search.build_condition if @search.conditions.empty?
+
+  end
            
 end
 

@@ -12,8 +12,6 @@
 #
 
 class List < ActiveRecord::Base
-  # include Elasticsearch::Model
-  # include Elasticsearch::Model::Callbacks
   has_many :items, inverse_of: :list ,autosave: :true, dependent: :destroy
   belongs_to :user
   validates_presence_of :title
@@ -29,6 +27,8 @@ class List < ActiveRecord::Base
       end
     end
   end
+
+
 
 
 end

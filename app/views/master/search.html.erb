@@ -1,0 +1,16 @@
+<%= search_form_for @search,url:search_lists_path , method: :get do |f| %>    
+  <%= f.condition_fields do |c| %>
+    <%= render "condition_fields", f: c %>
+  <% end %>
+  <%= f.submit %>
+<% end %>
+
+<%= content_tag :table do %>
+  <%= content_tag :th, sort_link(@search,'list_title') %>
+  <% @items.each do |i| %>
+  	<%= content_tag :tr, i.title do %>
+  	<%= content_tag :td, i.title  %>
+  	<% end %>
+  <% end %>
+<% end %>
+
