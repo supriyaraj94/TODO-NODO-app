@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   def destroy
     @olditem = Item.find(params[:id])
     Item.destroy(params[:id])
-    #UserMailer.welcome_email(@olditem).deliver_now
+    UserMailer.welcome_email(@olditem).deliver_now
     redirect_to list_items_path(params[:list_id])
   end
 

@@ -93,11 +93,11 @@
           <%= article.title %>
         </div>
         <div class="panel-body">
-          <%= article.description %> 
-          <button type="button" key= <%=article.id%> class="move_item">Move Item</button>
-          <button type="button" key= <%=article.id%> class="edit_item">Edit Item</button>
-          <%= link_to 'Delete Item', list_item_path(@list,article), method: :delete %>
-          <%= link_to 'Manage Comments', list_item_comments_path(@list,article), method: :get%>
+          <%= article.description %> <br>
+          <button type="button" , class="btn btn-xs btn-warning" key= <%=article.id%> class="move_item">Move Item</button>
+          <button type="button" key= <%=article.id%> class="edit_item btn btn-xs btn-warning">Edit Item</button>
+          <%= link_to 'Delete Item', list_item_path(@list,article), method: :delete , class: "btn btn-xs btn-danger" %>
+          <%= link_to 'Manage Comments', list_item_comments_path(@list,article), method: :get  ,class: "btn btn-xs btn-info"%><br>
           <%= image_tag article.avatar.url(:thumb) %>
         </div>
       </div>

@@ -1,6 +1,6 @@
 # Add a show action
 class ListsController < ApplicationController
-  before_filter  :authenticate_admin! or :authenticate_user!
+  before_filter :authenticate_user!
   before_action :set_list, only: [:edit, :update]
 
   def index
