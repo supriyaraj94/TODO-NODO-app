@@ -12,6 +12,7 @@
 #
 
 class List < ActiveRecord::Base
+  before_validation :default_values
   has_many :items, inverse_of: :list ,autosave: :true, dependent: :destroy
   belongs_to :user
   validates_presence_of :title
@@ -26,6 +27,12 @@ class List < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def default_values
+      if self.description.nil? || self.description=='' 
+        self.description = 'No description available' 
+      end
   end
 
 

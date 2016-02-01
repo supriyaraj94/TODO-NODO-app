@@ -5,15 +5,18 @@ class ItemsController < ApplicationController
 
   def new
     @list = List.find(params[:list_id])
+    @new_item = Item.new
   end
 
   def create
-    @newitem = Item.new(item_params)
     @list = List.find(params[:list_id])
-    @newitem.priority = @list.items.size + 1
-    #add errors here
-    @list.items << @newitem
-    redirect_to list_items_path(@list)
+    @new_item = @list.items.new(item_params)
+    @new_item.priority = @list.items.size + 1
+    if @new_item.save
+      redirect_to list_items_path(@list)
+    else
+      render :new
+    end
   end
 
   def index

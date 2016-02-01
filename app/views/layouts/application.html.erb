@@ -12,32 +12,34 @@
   <%= navbar_header brand: 'TODO app', brand_link: 'http://localhost:3000/home' %>
   <%= navbar_collapse do %>
     <%= navbar_group class: 'foo', id: 'menu' do %>
-      <%= navbar_item "View lists as user", 'http://localhost:3000/lists' %>
-      <%= navbar_item "View lists as admin", 'http://localhost:3000/master' %>
-      <%= navbar_item "Export Data", 'http://localhost:3000/master/exportData.csv' %>
-       <%= navbar_item "Search", 'http://localhost:3000/master/search' %>
+      <%= navbar_item "View lists as user", lists_path %>
+      <%= navbar_item "View lists as admin", master_path %>
+      <%= navbar_item "Export Data", master_exportData_path+".csv" %>
+       <%= navbar_item "Search", search_lists_path %>
     <% end %>
     <%= navbar_group align: 'right' do %>
       <% if user_signed_in? # check if user is logged in, maybe like "if current_user.present?" %>
       <li class="active">
-       <a  rel="nofollow" data-method="delete" href="http://localhost:3000/users/sign_out">User Sign Out</a></li>
+       <a  rel="nofollow" data-method="delete" href="<%= destroy_user_session_path%>">User Sign Out</a></li>
       <% else %>
-        <%= navbar_item "User Log In", 'http://localhost:3000/users/sign_in' %>
-        <%= navbar_item "User Sign Up", 'http://localhost:3000/users/sign_up' %>
+        <%= navbar_item "User Log In", new_user_session_path %>
+        <%= navbar_item "User Sign Up", new_user_registration_path %>
       <% end %>
     <% end %>
     <%= navbar_group align: 'right' do %>
       <% if admin_signed_in? # check if user is logged in, maybe like "if current_user.present?" %>
            <li class="active">
-       <a  rel="nofollow" data-method="delete" href="http://localhost:3000/admins/sign_out">Admin Sign Out</a></li>
+       <a  rel="nofollow" data-method="delete" href="<%= destroy_admin_session_path%>">Admin Sign Out</a></li>
       <% else %>
-        <%= navbar_item "Admin Log In", 'http://localhost:3000/admins/sign_in' %>
-          <%= navbar_item "Admin Sign Up", 'http://localhost:3000/admins/sign_up' %>
+        <%= navbar_item "Admin Log In", new_admin_session_path %>
+          <%= navbar_item "Admin Sign Up", new_admin_registration_path %>
       <% end %>
     <% end %>
   <% end %>
 <% end %>
-
+<% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+<% end %>
 <!-- -->
 <div class="container-fluid">
   <%= yield %>
